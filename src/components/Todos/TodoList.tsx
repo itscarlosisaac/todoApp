@@ -1,19 +1,25 @@
-import React, { ComponentType } from 'react'
-import { useFetch } from '../../hooks/useFetch'
+import { ComponentType, useContext } from 'react'
+import { TodoContext } from '../../context/TodoContext'
 import { Todo as TodoType } from '../../types/types'
 import { Todo } from './Todo'
 
-
 export const TodoList: ComponentType = () => {
-  const [todos, isLoading, error] = useFetch("https://jsonplaceholder.typicode.com/todos")
+  const [context] = useContext(TodoContext)
+
+  const { todos, searchFilter } = context!;
+  const filteredTodos = todos.filter((todo:any) => (
+    todo.title.toLowerCase().includes(searchFilter))
+  )
 
   return (
-    <div>
-      {
-        todos.map((todo: TodoType, index: number) => (
-          <Todo key={`key__${todo.id}`} {...todo} />
-       )) 
-      }
-    </div>
+    <>
+      <ul>
+        {
+          filteredTodos.map((todo: TodoType, index: number) => (
+            <Todo key={`key__${todo.id}`} {...todo} />
+          ))
+        }
+        </ul>
+    </>
   )
 }

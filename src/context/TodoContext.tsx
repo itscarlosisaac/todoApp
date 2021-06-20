@@ -1,13 +1,15 @@
 import React, { createContext } from "react";
+import { Todo } from "../types/types";
 
-// type order = "ASC" | "DESC"
+export type OrderType = "ASC" | "DESC" 
 
-// const initialState = {
-//   todoOrder: "ASC",
-//   data: [],
-//   filteredData: [],
-//   page: 0,
-// }
+export type TypeInitialState = {
+  page: number,
+  todos: Todo[],
+  isLoading: boolean,
+  error: null | Error,
+  todoOrder: OrderType,
+  searchFilter: string,
+}
 
-
-export const TodoContext = createContext(null);
+export const TodoContext = createContext<[TypeInitialState, React.Dispatch<any>] | []>([]);

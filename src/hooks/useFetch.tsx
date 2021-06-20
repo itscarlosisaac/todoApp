@@ -2,12 +2,11 @@ import { useState, useEffect } from 'react';
 import { Todo } from '../types/types';
 
 export const useFetch = ( url:string ):  [ Todo[], boolean, Error|null] => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<null | Error>(null);
   const [data, setData] = useState<Todo[]>([])
 
   useEffect(() => {
-    setIsLoading(true);
     fetch(url)
       .then(data => data.json())
       .then(data => {
@@ -20,7 +19,6 @@ export const useFetch = ( url:string ):  [ Todo[], boolean, Error|null] => {
         setData([])
         setIsLoading(false)
       })
-    setIsLoading(false);
   }, [url])
 
   return [data, isLoading, error];
