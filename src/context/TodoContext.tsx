@@ -10,6 +10,7 @@ export type TypeInitialState = {
   error: null | Error,
   todoOrder: OrderType,
   searchFilter: string,
+  showCompleted: boolean
 }
 
 export const TodoContext = createContext<[TypeInitialState, React.Dispatch<any>] | []>([]);

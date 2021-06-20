@@ -1,7 +1,7 @@
 import { SortAscendingIcon, SortDescendingIcon, ViewListIcon } from '@heroicons/react/outline';
 import { useContext } from 'react';
 import { TodoContext } from '../../context/TodoContext';
-import { sortTodos } from '../../reducer/todoActions';
+import { sortTodos, toggleCompleted } from '../../reducer/todoActions';
 
 export const Filter = () => {
 
@@ -13,8 +13,16 @@ export const Filter = () => {
     }
   }
 
+  const toggle = () => {
+    if (dispatch) {
+      dispatch(toggleCompleted())
+    }
+  }
+
   return (
     <div className="flex ">
+      <small onClick={toggle} className="cursor-pointer hover:text-blue-500">{context?.showCompleted ? "Hide" : "Show"} completed</small>
+      <small className="mx-3">|</small>
       <small className="mr-3">Sort by: </small>
       <div onClick={sorting}>
         {

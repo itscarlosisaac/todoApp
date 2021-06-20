@@ -6,10 +6,12 @@ import { Todo } from './Todo'
 export const TodoList: ComponentType = () => {
   const [context] = useContext(TodoContext)
 
-  const { todos, searchFilter } = context!;
-  const filteredTodos = todos.filter((todo:any) => (
-    todo.title.toLowerCase().includes(searchFilter))
-  )
+  const { todos, searchFilter, showCompleted } = context!;
+  const filteredTodos = todos.filter((todo: any) => {
+    return showCompleted ?
+      todo.title.toLowerCase().includes(searchFilter) :
+      todo.title.toLowerCase().includes(searchFilter) && !todo.completed    
+  })
 
   return (
     <>

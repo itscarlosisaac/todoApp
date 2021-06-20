@@ -7,5 +7,6 @@ export const initialState: TypeInitialState = {
   searchFilter: "",
   page: 0,
   isLoading: true,
-  error: null
+  error: null,
+  showCompleted: true,
 }

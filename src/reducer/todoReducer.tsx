@@ -5,6 +5,7 @@ export const ActionsTypes = {
   sortDesc: "[Sort] Desc",
   filter: "[Filter] Search",
   fetch: "[Fetching] Fetch",
+  toggleComplete: "[Toggle] Complete"
 }
 
 
@@ -38,6 +39,11 @@ export const TodoReducer = (state: any, action: any) => {
       return {
         ...state,
         searchFilter: action.payload.toLowerCase()
+      };
+    case ActionsTypes.toggleComplete:
+      return {
+        ...state,
+        showCompleted: !state.showCompleted
       };
     default:
       return state;

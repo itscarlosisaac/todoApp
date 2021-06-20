@@ -26,3 +26,9 @@ export const filterTodos = (searchParam: string) => {
     payload: searchParam.toLowerCase()
   }
 }
+
+export const toggleCompleted = () => {
+  return {
+    type: ActionsTypes.toggleComplete
+  }
+}

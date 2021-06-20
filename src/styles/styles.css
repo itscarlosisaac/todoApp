@@ -1,12 +1,13 @@
 .todo {
   opacity: 1;
-  transition:cubic-bezier(1, 0, 0, 1) 0.5s transform;
+  transition:cubic-bezier(1, 0, 0, 1) 0.5s all;
 }
 .todo.completed {
   text-decoration: line-through !important;
   opacity: 0.5;
   transform: scale(0.9);
   perspective: 917px;
+  margin: 0 !important;
 }
 .todo.completed .text-blueish-700 {
   text-decoration: line-through !important;
