@@ -22,11 +22,9 @@ function App() {
   return (
 
     <>
-      {/* <ThemeContext.Provider value={ "light" }> */}
-        <TodoContext.Provider value={ [reducerState, dispatch] }>
-          <AppRouter />
-        </TodoContext.Provider>
-      {/* </ThemeContext.Provider> */}
+      <TodoContext.Provider value={ [reducerState, dispatch] }>
+        <AppRouter />
+      </TodoContext.Provider>
     </>
   );
 }

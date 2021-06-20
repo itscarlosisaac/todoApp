@@ -1,9 +1,5 @@
 import { useState } from "react";
 
-type KeyValPair = {
-  [key: string]: string
-}
-
 export const useInputForm = (initialState: any ) => {
   const [values, setValues] = useState(initialState);
 

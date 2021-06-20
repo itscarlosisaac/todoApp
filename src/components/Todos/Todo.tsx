@@ -1,9 +1,11 @@
 import React, { ComponentType, useState } from 'react'
 import { CheckCircleIcon } from '@heroicons/react/outline';
+import { Link } from 'react-router-dom';
 
 export const Todo: ComponentType<any> = ({ id, completed, title }) => {
   
   const [isCompleted, setIsCompleted] = useState<boolean>(completed)
+  
   
   const handleToggleComplete = () => {
     setIsCompleted(prev => !prev)
@@ -20,7 +22,7 @@ export const Todo: ComponentType<any> = ({ id, completed, title }) => {
         style={{minWidth: "40px"}}
         className={`cursor-pointer h-10 w-10 pr-4 border-r border-r-solid border-r-black mr-4 ${isCompleted ? `text-blue-500` : `text-blue-50 `}`} />
       <span className="text-orange-500 mr-2">{id}. </span>
-      <span className="text-blueish-700">{title}</span>
+      <Link to={`/todo/${id}`} className="text-blueish-700">{title}</Link>
     </li>
   )
 }

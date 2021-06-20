@@ -1,0 +1,9 @@
+{
+  "task": {
+    "title": "string",
+    "id": "int",
+    "completed": "boolean",
+    "createdAt": "date",
+    "description": "string"
+  }
+}

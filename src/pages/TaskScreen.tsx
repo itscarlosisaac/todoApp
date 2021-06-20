@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
-import { TodoList } from '../components/Todos/TodoList'
+import { Component } from 'react'
 import { Header } from '../components/Header';
-import { Filter } from '../components/Filters/Filter';
-import { Search } from '../components/Search';
-export class HomeScreen extends Component {
+
+export class TaskScreen extends Component {
 
   constructor(props: any) {
     super(props)
-    this.state = {}
+    this.state = {
+
+    }
   }
 
   render() {
@@ -16,14 +16,10 @@ export class HomeScreen extends Component {
         <Header/>
         <main className="px-4 flex flex-col items-center pt-10">
           <section className="max-w-2xl w-full">
-            <div className="flex-grow flex justify-center ">
-              <Search />
-            </div>
             <div className="py-4 flex justify-between w-full items-center">
-              <h1 className="sub">Tasks </h1>
-              <Filter/>
+              <h1>Task </h1>
+              <button>Go Back</button>
             </div>
-            <TodoList />
           </section>
         </main>
       </div>
