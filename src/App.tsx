@@ -1,71 +1,69 @@
-import { useEffect, useReducer, useState, useRef } from 'react';
+import { useEffect, useReducer, useState, useRef, useCallback } from 'react';
 import { TodoContext } from './context/TodoContext';
-import { useFetch } from './hooks/useFetch';
 import { AppRouter } from './routes/AppRouter';
 import { initialState } from './store/store';
 import { TodoReducer } from './reducer/todoReducer';
 import { fetchingTodos } from './reducer/todoActions';
-import { LoadingPage } from './pages/LoadingPage';
+import { Todo } from './types/types';
 
-function App() {
+export const App = () => {
 
   const [reducerState, dispatch] = useReducer(TodoReducer, initialState)
-  const [page, setPage] = useState(0);
-  const [prevY, setPrevY] = useState(0);
-  const loadingRef = useRef<HTMLDivElement>(null);
+  const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [todos, setTodos] = useState<Todo[]>([]);
+  const [error, setError] = useState<Error | null>(null);
+
+  const scrollable = useRef<HTMLDivElement>(null);
+
+  const getData = async (p:number) => {
+    setIsLoading(true);
   
-  // const [todos, isLoading, error] = useFetch("https://my-json-server.typicode.com/itscarlosisaac/todoApp/tasks");
-  const [todos, isLoading, error] = useFetch(`https://jsonplaceholder.typicode.com/todos?_page=${page}&_limit=10`);
-
-  //
-  useEffect(() => {
-    dispatch(fetchingTodos(todos, isLoading, error))
-  }, [todos, isLoading, error])
-
-  // useEffect(() => {
-  //   attachObserver()
-  // }, [])
-
-  const attachObserver = () => {
-    let options = {
-      root:null,
-      rootMargin: "0px",
-      threshold: 0.1
-    };
-    let observer = new IntersectionObserver(handleObserver, options);
-    observer.observe(loadingRef.current!);
+    return fetch(`https://jsonplaceholder.typicode.com/todos?_page=${p}&_limit=10`)
+      .then(data => data.json())
+      .then(async (data) => {
+        const fetchedTodos = [...todos, ...data]
+        await setIsLoading(false);
+        await setError(null);
+        await setTodos(fetchedTodos);
+        dispatch(fetchingTodos(fetchedTodos, isLoading, error))
+      })
+      .catch(e => {
+        setIsLoading(false);
+        setError(e);
+        setTodos([]);
+      })
   }
-
-  const handleObserver = (entities: any, observer: any) => {
-    const y = entities[0].boundingClientRect.y;
-    console.log("Y",y)
-    console.log("PREV:",prevY)
-    if (prevY > y) {
-      console.log(":HEY")
-      // const lastPhoto = this.state.photos[this.state.photos.length - 1];
-      // const curPage = lastPhoto.albumId;
-      setPage((page) => page + 1);
+  
+  const handleObserver = useCallback((entries) => {
+    const target = entries[0];
+    if (target.isIntersecting) {
+      setPage((prev) => prev + 1);
     }
-    setPrevY(y);
-    console.log("PAGE:",page)
-  }
+  }, []);
 
-  // if (isLoading) {
-  //   return (<LoadingPage />)
-  // }
+  useEffect(() => {
+    getData(page)
+  }, [page])
 
+  useEffect(() => {
+    const options = {
+      root:null,
+      rootMargin: "10px",
+      threshold: 0.5
+    };
+    const observer = new IntersectionObserver(handleObserver, options);
+    observer.observe(scrollable.current!);
+  }, [handleObserver])
 
   return (
-
     <div style={{ minHeight: "800px" }}>
       <TodoContext.Provider value={[reducerState, dispatch]}>
-          <AppRouter  />
+        <AppRouter  />
       </TodoContext.Provider>
-      {/* <div ref={loadingRef} >
-        <span>Loading...</span>
-      </div> */}
+      <div ref={scrollable} >
+        {isLoading && <span>Loading...</span>}
+      </div>
     </div>
   );
 }
-
-export default App;

@@ -1,18 +1,15 @@
 import { Component } from 'react'
 import { Header } from '../components/Header';
-
 export class TaskScreen extends Component<any,any> {
 
   constructor(props: any) {
     super(props)
-    console.log(this.props)
     this.handleGoBack = this.handleGoBack.bind(this);
   }
 
   handleGoBack() {
     this.props.history.goBack();
   }
-
 
   render() {
     const {id, completed, title } = this.props.location.state

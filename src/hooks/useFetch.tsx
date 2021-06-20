@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Todo } from '../types/types';
 
-export const useFetch = ( url:string ):  [ Todo[], boolean, Error|null] => {
+export const useFetch = ( url:string, initialstate:Todo[] ):  [ Todo[], boolean, Error|null] => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<null | Error>(null);
-  const [data, setData] = useState<Todo[]>([])
+  const [data, setData] = useState<Todo[]>(initialstate)
 
   useEffect(() => {
     fetch(url)
