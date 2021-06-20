@@ -10,6 +10,7 @@ export const App = () => {
 
   const [reducerState, dispatch] = useReducer(TodoReducer, initialState)
   const [page, setPage] = useState(1);
+  const [prevY, setPrevY] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [todos, setTodos] = useState<Todo[]>([]);
   const [error, setError] = useState<Error | null>(null);
@@ -36,11 +37,20 @@ export const App = () => {
   }
   
   const handleObserver = useCallback((entries) => {
-    const target = entries[0];
-    if (target.isIntersecting) {
-      setPage((prev) => prev + 1);
-    }
+    
+    // const target = entries[0];
+    // if (prevY > target.boundingClientRect.y) {
+    //   setPage((prev) => prev + 1);
+    // }
+    // setPrevY(target.boundingClientRect.y);
   }, []);
+
+  useEffect(() => {
+    window.onscroll = (s:any) => {
+      console.log(s.target.body.scrollHeight);
+    }
+    return () => { window.onscroll = null };
+  }, [])
 
   useEffect(() => {
     getData(page)
@@ -49,19 +59,19 @@ export const App = () => {
   useEffect(() => {
     const options = {
       root:null,
-      rootMargin: "10px",
-      threshold: 0.5
+      rootMargin: "0px",
+      threshold: 1.0
     };
     const observer = new IntersectionObserver(handleObserver, options);
     observer.observe(scrollable.current!);
   }, [handleObserver])
 
   return (
-    <div style={{ minHeight: "800px" }}>
+    <div style={{ minHeight: "100vh" }}>
       <TodoContext.Provider value={[reducerState, dispatch]}>
         <AppRouter  />
       </TodoContext.Provider>
-      <div ref={scrollable} >
+      <div ref={scrollable} style={{ height: "100px", margin: "30px" }}>
         {isLoading && <span>Loading...</span>}
       </div>
     </div>
