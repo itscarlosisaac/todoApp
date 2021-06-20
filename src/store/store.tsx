@@ -5,7 +5,7 @@ export const initialState: TypeInitialState = {
   todoOrder: "ASC",
   todos: [],
   searchFilter: "",
-  page: 0,
+  page: 1,
   isLoading: true,
   error: null,
   showCompleted: true,

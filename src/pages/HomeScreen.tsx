@@ -3,7 +3,9 @@ import { TodoList } from '../components/Todos/TodoList'
 import { Header } from '../components/Header';
 import { Filter } from '../components/Filters/Filter';
 
+
 import { Search } from '../components/Search';
+import { Pagination } from '../components/Pagination';
 
 interface IProps {
 
@@ -32,6 +34,7 @@ export class HomeScreen extends Component<IProps, IState>  {
               <Filter/>
             </div>
             <TodoList />
+            <Pagination />
           </section>
         </main>
       </div>

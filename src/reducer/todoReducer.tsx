@@ -5,7 +5,9 @@ export const ActionsTypes = {
   sortDesc: "[Sort] Desc",
   filter: "[Filter] Search",
   fetch: "[Fetching] Fetch",
-  toggleComplete: "[Toggle] Complete"
+  toggleComplete: "[Toggle] Complete",
+  pageNext: "[Page] Next",
+  pagePrev: "[Page] Prev",
 }
 
 
@@ -19,6 +21,7 @@ export const TodoReducer = (state: any, action: any) => {
         ...state,
         ...action.payload,
       }
+    
     case ActionsTypes.sortAsc:
       SortedTodos.sort((a, b) => a.title < b.title ? 1 : -1);
       return {
@@ -35,16 +38,31 @@ export const TodoReducer = (state: any, action: any) => {
         todos: SortedTodos
       };
 
+    case ActionsTypes.pageNext:
+      console.log(action.payload)
+      return {
+        ...state,
+        page: action.payload
+      };
+    case ActionsTypes.pagePrev:
+      return {
+        ...state,
+        page: action.payload
+      };
+  
+
     case ActionsTypes.filter:
       return {
         ...state,
         searchFilter: action.payload.toLowerCase()
       };
+    
     case ActionsTypes.toggleComplete:
       return {
         ...state,
         showCompleted: !state.showCompleted
       };
+    
     default:
       return state;
   }

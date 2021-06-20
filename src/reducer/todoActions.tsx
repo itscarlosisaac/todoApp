@@ -32,3 +32,16 @@ export const toggleCompleted = () => {
     type: ActionsTypes.toggleComplete
   }
 }
+
+export const goToNextPage = (page:number) => {
+  return {
+    type: ActionsTypes.pageNext,
+    payload: page
+  }
+}
+export const goToPrevPage = (page:number) => {
+  return {
+    type: ActionsTypes.pagePrev,
+    payload: page
+  }
+}
