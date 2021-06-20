@@ -1,19 +1,27 @@
-import React, { Component } from 'react'
+import React, { Component, ComponentClass } from 'react'
 import { TodoList } from '../components/Todos/TodoList'
 import { Header } from '../components/Header';
 import { Filter } from '../components/Filters/Filter';
+
 import { Search } from '../components/Search';
-export class HomeScreen extends Component {
+
+interface IProps {
+
+}
+interface IState {
+
+}
+
+export class HomeScreen extends Component<IProps, IState>  {
 
   constructor(props: any) {
-    super(props)
-    this.state = {}
+    super(props);
   }
 
   render() {
     return (
       <div className="p-0 m-0 bg-blueish-100 min-h-screen min-w-screen" >
-        <Header/>
+        <Header />
         <main className="px-4 flex flex-col items-center pt-10">
           <section className="max-w-2xl w-full">
             <div className="flex-grow flex justify-center ">

@@ -12,6 +12,8 @@ export const TodoList: ComponentType = () => {
       todo.title.toLowerCase().includes(searchFilter) :
       todo.title.toLowerCase().includes(searchFilter) && !todo.completed    
   })
+  
+
 
   return (
     <>
