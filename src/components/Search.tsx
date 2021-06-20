@@ -11,9 +11,12 @@ export const Search = () => {
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) : void => {
     setFormValues(event.target)
-    if (dispatch) {
-      dispatch(filterTodos(event.target.value))
-    }
+    dispatch && dispatch(filterTodos(event.target.value))
+  }
+
+  const handleReset = () => {
+    reset();
+    dispatch && dispatch(filterTodos(""))
   }
 
   return (
@@ -29,7 +32,7 @@ export const Search = () => {
         onChange={handleInputChange}  />
       <button
         className="clear-btn px-6 py-3 text-sm bg-indigo-500 border border-solid border-indigo-500 text-white hover:bg-indigo-700"
-        onClick={reset}>Clear</button>
+        onClick={handleReset}>Clear</button>
     </div>
   )
 }
