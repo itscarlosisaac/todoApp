@@ -43,6 +43,12 @@ input {
   padding-left: 23px;
 }
 
+.back_cta{
+  text-transform: uppercase;
+  font-size: 12px;  
+  letter-spacing: 0.4pt;
+  font-weight: 500;
+}
 
 button:disabled{
   pointer-events: none;

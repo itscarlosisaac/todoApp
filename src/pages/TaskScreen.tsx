@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import { Header } from '../components/Header';
+import { ArrowLeftIcon } from '@heroicons/react/outline'
 export class TaskScreen extends Component<any,any> {
 
   constructor(props: any) {
@@ -19,8 +20,11 @@ export class TaskScreen extends Component<any,any> {
         <main className="px-4 flex flex-col items-center pt-10">
           <section className="max-w-2xl w-full">
             <div className="py-4 flex justify-between w-full items-center">
-              <h1 className="sub">Tasks </h1>
-              <button className="px-4 py-2 rounded-full bg-indigo-500 text-white" onClick={this.handleGoBack } >Go Back</button>
+              <h1 className="sub">Task </h1>
+              <button className="back_cta px-4 py-2 rounded-full bg-indigo-500 text-white flex items-center justify-center hover:bg-indigo-700" onClick={this.handleGoBack} >
+                <ArrowLeftIcon className="text-white h-5 mr-2" />
+                Go Back
+              </button>
             </div>
             <article className="p-6 shadow-sm bg-white rounded-md">
               <h1 className="text-2xl font-semibold text-blueish-800"><span className="mr-2 text-orange-500">{ id }.</span>{title}</h1>

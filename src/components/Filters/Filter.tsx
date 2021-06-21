@@ -21,9 +21,9 @@ export const Filter = () => {
 
   return (
     <div className="flex ">
-      {/* <small onClick={toggle} className="cursor-pointer hover:text-blue-500">{context?.showCompleted ? "Hide" : "Show"} completed</small> */}
+      <small onClick={toggle} className="cursor-pointer hover:text-blue-500">{context?.showCompleted ? "Hide" : "Show"} completed</small>
       <small className="mx-3">|</small>
-      <small className="mr-3">Sort by: </small>
+      <small className="mr-3">Sort: </small>
       <div onClick={sorting}>
         {
           context?.todoOrder === "ASC" ?
