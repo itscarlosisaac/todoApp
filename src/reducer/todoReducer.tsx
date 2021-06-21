@@ -8,6 +8,7 @@ export const ActionsTypes = {
   toggleComplete: "[Toggle] Complete",
   pageNext: "[Page] Next",
   pagePrev: "[Page] Prev",
+  clearSeach: "[Search] Clear"
 }
 
 
@@ -39,11 +40,11 @@ export const TodoReducer = (state: any, action: any) => {
       };
 
     case ActionsTypes.pageNext:
-      console.log(action.payload)
       return {
         ...state,
         page: action.payload
       };
+    
     case ActionsTypes.pagePrev:
       return {
         ...state,
@@ -62,7 +63,12 @@ export const TodoReducer = (state: any, action: any) => {
         ...state,
         showCompleted: !state.showCompleted
       };
-    
+    case ActionsTypes.clearSeach:
+      return {
+        ...state,
+        searchFilter: ""
+      };
+      
     default:
       return state;
   }

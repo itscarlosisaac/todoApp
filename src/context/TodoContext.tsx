@@ -14,3 +14,4 @@ export type TypeInitialState = {
 }
 
 export const TodoContext = createContext<[TypeInitialState, React.Dispatch<any>] | []>([]);
+export const TodoConsumer = TodoContext.Consumer;

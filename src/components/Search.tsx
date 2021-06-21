@@ -1,13 +1,19 @@
-import React, {useContext } from 'react'
+import React, {ComponentType, useContext, useEffect } from 'react'
 import { TodoContext } from '../context/TodoContext'
 import { useInputForm } from '../hooks/useInputForm'
-import { filterTodos } from '../reducer/todoActions'
+import { filterTodos, clearSearch } from '../reducer/todoActions'
 
-export const Search = () => {
+export const Search: React.FC = () => {
 
   const [formValues, setFormValues, reset] = useInputForm({ search: "" })
-  const [, dispatch] = useContext(TodoContext)
-  const { search } = formValues
+  const [context, dispatch] = useContext(TodoContext)
+  let { search } = formValues
+
+  useEffect(() => {
+    if (context && context.searchFilter !== "") {
+      setFormValues({name: "search", value: context.searchFilter })
+    }
+  }, [])
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) : void => {
     setFormValues(event.target)
@@ -16,7 +22,7 @@ export const Search = () => {
 
   const handleReset = () => {
     reset();
-    dispatch && dispatch(filterTodos(""))
+    dispatch && dispatch(clearSearch())
   }
 
   return (

@@ -39,9 +39,16 @@ export const goToNextPage = (page:number) => {
     payload: page
   }
 }
+
 export const goToPrevPage = (page:number) => {
   return {
     type: ActionsTypes.pagePrev,
     payload: page
+  }
+}
+
+export const clearSearch = () => {
+  return {
+    type: ActionsTypes.clearSeach
   }
 }

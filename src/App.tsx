@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from 'react';
+import { useEffect, useReducer, useState, useCallback } from 'react';
 import { TodoContext } from './context/TodoContext';
 import { AppRouter } from './routes/AppRouter';
 import { initialState } from './store/store';
@@ -12,7 +12,7 @@ export const App = () => {
   const [error, setError] = useState<Error | null>(null);
   const { page } = reducerState
 
-  const getData = async (p: number) => {
+  const getData = useCallback(async (p: number) => {
     setIsLoading(true);
     return fetch(`https://jsonplaceholder.typicode.com/todos?_page=${p}&_limit=10`)
       .then(data => data.json())
@@ -25,11 +25,11 @@ export const App = () => {
         setIsLoading(false);
         setError(e);
       })
-  }
+  }, [])
 
   useEffect(() => {
     getData(page)
-  }, [page])
+  }, [page, getData])
 
   return (
     <div style={{ minHeight: "100vh" }}>
