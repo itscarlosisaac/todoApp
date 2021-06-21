@@ -1,4 +1,4 @@
-import React, {ComponentType, useContext, useEffect } from 'react'
+import React, {useContext, useEffect } from 'react'
 import { TodoContext } from '../context/TodoContext'
 import { useInputForm } from '../hooks/useInputForm'
 import { filterTodos, clearSearch } from '../reducer/todoActions'
